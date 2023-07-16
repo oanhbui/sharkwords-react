@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import LetterButtons from './LetterButtons';
+import { useState } from 'react';
 
 function App() {
+  const [clickedButtons, setClickedButtons] = useState([]);
+  const handleGuess = (char) => {
+    setClickedButtons((clickedButtons) => [...clickedButtons, char])
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <section id="shark-img">
+        <img src="/images/guess0.png" />
+      </section>
+
+      <a id="play-again" href="#" style={{display: "none"}}>
+        The shark got you! Click here to play again.
+      </a>
+      <a id="win" href="#" style={{display: "none"}}>
+        Congratulations! 🥳 You won!
+      </a>
+
+      <section id="word-container"></section>
+
+      <LetterButtons clicked={clickedButtons} endGame={false} onGuess={handleGuess} />
     </div>
   );
 }
